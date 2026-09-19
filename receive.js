@@ -5,10 +5,16 @@
   var conn = null;
   var state = document.getElementById("state");
   var recvId = document.getElementById("receiver-id");
+  var copyIdButton = document.getElementById("copy-id-button");
   var status = document.getElementById("status");
   var message = document.getElementById("message");
   var sendMessageBox = document.getElementById("sendMessageBox");
   var sendButton = document.getElementById("sendButton");
+
+  message.addEventListener("click", function (event) {
+    var row = event.target.closest(".message-row");
+    if (row) solve(row);
+  });
   /**
    * Create the Peer object for our end of the connection.
    *
@@ -32,6 +38,7 @@
 
       console.log("ID: " + peer.id);
       recvId.innerHTML = "ID: " + peer.id;
+      copyIdButton.disabled = false;
       status.innerHTML = "Awaiting connection...";
     });
     peer.on("connection", function (c) {
@@ -86,7 +93,7 @@
         default:
           addMessage(
             '<span class="peerMsg">Peer: </span>' +
-              "<span class='msgs' onclick='solve(this)' style='border:1px solid red'>" +
+              "<span class='msgs'>" +
               data +
               "</span>"+"<br/>"
           );
@@ -114,18 +121,20 @@
       return t;
     }
 
-    message.innerHTML =
-      "<span>" +
-      message.innerHTML +
-      "<br/>" +
+    message.innerHTML +=
+      '<span class="message-row">' +
+      '<span class="message-time">' +
       h +
       ":" +
       m +
       ":" +
       s +
-      "</span>-" +
+      "</span>" +
+      '<span class="message-body">' +
       msg +
-      "<br/>";
+      "</span>" +
+      '<span class="message-hint">Click to reveal</span></span>';
+    message.scrollTop = message.scrollHeight;
   }
 
   // Listen for enter in message box
@@ -168,7 +177,7 @@
       console.log("Sent: " + newMsg);
       addMessage(
         "<span>You: </span> " +
-          "<span class='msgs' onclick='solve(this)' style='border:1px solid red'>" +
+          "<span class='msgs'>" +
           newMsg +
           "</span> " +
           "<br/>"
@@ -180,10 +189,28 @@
   // Start peer connection on click
 
   // Since all our callbacks are setup, start the process of obtaining an ID
+  copyIdButton.addEventListener("click", function () {
+    if (!peer || !peer.id || !navigator.clipboard) {
+      status.innerHTML = "Copy is unavailable in this browser";
+      return;
+    }
+
+    navigator.clipboard.writeText(peer.id).then(function () {
+      copyIdButton.innerHTML = "Copied";
+      status.innerHTML = "Peer ID copied to clipboard";
+      setTimeout(function () {
+        copyIdButton.innerHTML = "Copy ID";
+      }, 1600);
+    }).catch(function () {
+      status.innerHTML = "Could not copy the Peer ID";
+    });
+  });
   initialize();
 })();
 function solve(msg) {
-  msg.removeAttribute("onclick");
+  if (msg.classList.contains("is-revealed")) return;
+  var encryptedMessage = msg.querySelector(".msgs");
+  if (!encryptedMessage) return;
   var a = 9;
   var b = 1;
   var key = 0;
@@ -210,7 +237,7 @@ function solve(msg) {
       }
     }
   }
-  var password = msg.innerHTML;
+  var password = encryptedMessage.innerHTML;
   var newMsg = "";
   for (var i = 0; i < password.length; i++) {
     var char = charToNumber(password[i]);
@@ -222,6 +249,6 @@ function solve(msg) {
     }
     
   }
-  msg.innerHTML = newMsg;
-  msg.style.border="1px solid green";
+  encryptedMessage.innerHTML = newMsg;
+  msg.classList.add("is-revealed");
 }

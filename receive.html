@@ -17,10 +17,12 @@
         <span class="connection-label">Share this Peer ID</span>
         <div class="connection-row">
           <div class="peer-id-display" id="receiver-id">Generating ID...</div>
+          <button class="copy-button" id="copy-id-button" type="button" disabled>Copy ID</button>
         </div>
         <div class="status-line"><span id="state">Status</span><span id="status">Starting secure room...</span></div>
       </section>
       <section class="chat-card" aria-label="Chat messages">
+        <p class="message-help">Messages are encoded. Click a bubble to reveal its contents.</p>
         <div class="message" id="message"></div>
         <div id="interface">
           <input type="text" id="sendMessageBox" placeholder="Write a message..." autocomplete="off" autofocus />
