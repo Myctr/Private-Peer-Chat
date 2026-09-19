@@ -11,12 +11,6 @@
   var connectButton = document.getElementById("connect-button");
   var cueString = '<span class="cueMsg">Cue: </span>';
 
-  document.getElementById("message").style.height =
-    window.innerHeight - 270 + "px";
-  document.getElementById("sendMessageBox").style.width =
-    window.innerWidth - 70 + "px";
-  document.getElementById("receiver-id").style.width =
-    window.innerWidth - 135 + "px";
   /**
    * Create the Peer object for our end of the connection.
    *

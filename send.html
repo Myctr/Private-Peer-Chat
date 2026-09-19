@@ -1,42 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Encrypted Chat Application</title>
-    <link rel="stylesheet" href="index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Join a Chat | Encrypted Chat</title>
+    <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <h3 id="header" >Encrypted Chat Application</h3>
-
-    <div>
-      <div id="info">
-        <span id="state">Status: </span>
-        <span id="status"></span>
-      </div>
-      <br/>
-      <div>
-        <span id="receiver"
-          >ID:
-          <input
-            type="text"
-            id="receiver-id"
-        />
-        <button id="connect-button">Connect</button></span>
-        <hr>
-      </div>
-      <div>
+    <main class="app-shell chat-shell">
+      <header class="chat-header">
+        <a class="back-link" href="index.html">Back</a>
+        <h1 class="chat-title">Join a private chat</h1>
+        <span></span>
+      </header>
+      <section class="connection-panel">
+        <label class="connection-label" for="receiver-id">Peer ID</label>
+        <div class="connection-row">
+          <input type="text" id="receiver-id" placeholder="Paste the room ID" autocomplete="off" />
+          <button class="primary-button" id="connect-button" type="button">Connect</button>
+        </div>
+        <div class="status-line"><span id="state">Status</span><span id="status">Waiting to connect</span></div>
+      </section>
+      <section class="chat-card" aria-label="Chat messages">
         <div class="message" id="message"></div>
-        <span id="interface">
-          <input
-            type="text"
-            id="sendMessageBox"
-            placeholder="Enter a message..."
-            autofocus="true"
-          /><button type="button" id="sendButton">Send</button
-        >
-      </div>
-    </div>
+        <div id="interface">
+          <input type="text" id="sendMessageBox" placeholder="Write a message..." autocomplete="off" autofocus />
+          <button type="button" id="sendButton">Send</button>
+        </div>
+      </section>
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/peerjs@1.2.0/dist/peerjs.min.js"></script>
     <script src="send.js"></script>
   </body>

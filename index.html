@@ -1,17 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Encrypted Chat Application</title>
-    <link rel="stylesheet" href="index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A private peer-to-peer encrypted chat experience." />
+    <title>Private Chat | Encrypted Chat Application</title>
+    <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <h3 id="header" >Encrypted Chat Application</h3>
-    <button id="createChat" onclick="location.href='receive.html';">
-        Create Chat!
-    </button>
-    <button id="joinChat" onclick="location.href='send.html';">
-        Join Chat!
-    </button>
+    <main class="app-shell">
+      <header class="brand">
+        <span class="brand-mark">EC</span>
+        <div>
+          <p class="brand-name">Encrypted Chat</p>
+          <p class="brand-tagline">Private. Peer-to-peer. Simple.</p>
+        </div>
+      </header>
+      <section class="hero">
+        <p class="eyebrow">Private communication</p>
+        <h1>Talk freely.<br />Stay private.</h1>
+        <p class="hero-copy">Create a secure room or join a conversation directly with a peer. No accounts, no noise.</p>
+      </section>
+      <section class="choice-grid" aria-label="Chat actions">
+        <button class="choice-card" id="createChat" onclick="location.href='receive.html';">
+          <div>
+            <h2>Create a chat</h2>
+            <p>Start a room and share your unique peer ID with someone you trust.</p>
+          </div>
+        </button>
+        <button class="choice-card" id="joinChat" onclick="location.href='send.html';">
+          <div>
+            <h2>Join a chat</h2>
+            <p>Connect to an existing room using the peer ID you received.</p>
+          </div>
+        </button>
+      </section>
+    </main>
   </body>
+</html>

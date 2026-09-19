@@ -3,15 +3,12 @@
   var peer = null; // Own peer object
   var peerId = null;
   var conn = null;
+  var state = document.getElementById("state");
   var recvId = document.getElementById("receiver-id");
   var status = document.getElementById("status");
   var message = document.getElementById("message");
   var sendMessageBox = document.getElementById("sendMessageBox");
   var sendButton = document.getElementById("sendButton");
-  document.getElementById("message").style.height =
-    window.innerHeight - 270 + "px";
-  document.getElementById("sendMessageBox").style.width =
-    window.innerWidth - 70 + "px";
   /**
    * Create the Peer object for our end of the connection.
    *
