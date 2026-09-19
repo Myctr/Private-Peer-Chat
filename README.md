@@ -75,4 +75,4 @@ Small improvements to accessibility, connection handling, message encoding, and 
 
 ## License
 
-No license has been specified for this repository yet.
+This project is licensed under the [MIT License](LICENSE).
