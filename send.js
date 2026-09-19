@@ -145,12 +145,8 @@
 
   function addMessage(msg) {
     var now = new Date();
-    var h = now.getHours();
+    var h = addZero(now.getHours());
     var m = addZero(now.getMinutes());
-    var s = addZero(now.getSeconds());
-
-    if (h > 12) h -= 12;
-    else if (h === 0) h = 12;
 
     function addZero(t) {
       if (t < 10) t = "0" + t;
@@ -159,17 +155,15 @@
 
     message.innerHTML +=
       '<span class="message-row">' +
+      '<span class="message-bubble">' +
+      '<span class="message-body">' +
+      msg +
+      "</span></span>" +
       '<span class="message-time">' +
       h +
       ":" +
       m +
-      ":" +
-      s +
-      "</span>" +
-      '<span class="message-body">' +
-      msg +
-      "</span>" +
-      '<span class="message-hint">Click to reveal</span></span>';
+      "</span></span>";
     message.scrollTop = message.scrollHeight;
   }
 
